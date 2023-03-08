@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "author": "",
+  "author": "Dewesh Jha deweshjha4@gmail.com https://github.com/DeweshSoc",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
