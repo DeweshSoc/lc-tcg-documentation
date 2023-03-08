@@ -11,7 +11,8 @@
     }
   },
   "servers": [
-    { "url": "http://localhost:5000", "description": "Local server" }
+    { "url": "http://localhost:5000", "description": "Local server" },
+    { "url": "https://lc-tcg-api.cyclic.app/", "description": "remote server" }
   ],
   "tags": [
     {
@@ -27,17 +28,16 @@
           "count": { "type": "number" },
           "minSz": { "type": "number" },
           "maxSz": { "type": "number" },
-          "min": { "type": "number" },
-          "max": { "type": "number" },
-          "negProb":{"type": "number"},
-          "unique": { "type": "boolean" }
+          "minEle": { "type": "number" },
+          "maxEle": { "type": "number" },
+          "uniqueEle": { "type": "boolean" }
         }
       },
       "arrayResponsePayload": {
         "type": "object",
         "properties": {
           "count": { "type": "number" },
-          "size": { "type": "number" },
+          "size": { "type": "string" },
           "arrays": {
             "type": "array",
             "items": {
