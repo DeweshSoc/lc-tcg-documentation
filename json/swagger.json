@@ -30,7 +30,18 @@
           "maxSz": { "type": "number" },
           "minEle": { "type": "number" },
           "maxEle": { "type": "number" },
-          "uniqueEle": { "type": "boolean" }
+          "areEleUnique": { "type": "boolean" }
+        }
+      },
+      "arraySortedRequestBody": {
+        "type": "object",
+        "properties": {
+          "minSz": { "type": "number" },
+          "maxSz": { "type": "number" },
+          "minEle": { "type": "number" },
+          "maxEle": { "type": "number" },
+          "areEleUnique": { "type": "boolean" },
+          "increasingOrder": { "type": "boolean" }
         }
       },
       "arrayResponsePayload": {
@@ -65,7 +76,7 @@
     "/api/arrays/0": {
       "get": {
         "tags": ["Arrays"],
-        "summary": "Get a random array",
+        "summary": "Get a random array of size N, where 1<=N<=1000",
         "description": "The endpoint returns an array of strings, wherein the string represents an array of random size filled with random numbers",
         "operationId": "getRandomArray",
         "responses": {
@@ -94,18 +105,57 @@
     },
     "/api/arrays/1": {
       "post": {
-        "tags": ["Array"],
-        "summary": "Get random customised arrays",
-        "description": "This endpoint returns an array of string representation of random sized random arrays based on customisation provided by user",
-        "requestBody":{
-            "description": "options to generate arrays",
-            "content": {
-                "application/json":{
-                    "schema":{
-                        "$ref":"#/components/schemas/arrayRequestBody"
-                    }
-                }
+        "tags": ["Arrays"],
+        "summary": "Get upto FIVE random customised arrays",
+        "description": "Allowed Ranges for custom array request:<pre>\n1 <= count <= 5\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle</pre>",
+        "requestBody": {
+          "description": "Customization option to generate arrays",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/arrayRequestBody"
+              }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation - returns valid response containing the generated array",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/arrayResponsePayload"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error - returns error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/arrays/2": {
+      "post": {
+        "tags": ["Arrays"],
+        "summary": "Get ONE random customised sorted array",
+        "description": "Allowed Ranges for custom array request:<pre>\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle\nstrictOrder &#8712; [true,false]\n increasingOrder &#8712; [true,false]</pre>",
+        "requestBody": {
+          "description": "Customization Options to generate arrays",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/arraySortedRequestBody"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
