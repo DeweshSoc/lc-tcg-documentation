@@ -107,7 +107,7 @@
       "post": {
         "tags": ["Arrays"],
         "summary": "Get upto FIVE random customised arrays",
-        "description": "Allowed Ranges for custom array request:<pre>\n1 <= count <= 5\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle</pre>",
+        "description": "Allowed Ranges for custom array request:<pre>\n1 <= count <= 5\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle\nareEleUnique &#8712; [true,false]</pre>",
         "requestBody": {
           "description": "Customization option to generate arrays",
           "content": {
@@ -138,6 +138,16 @@
                 }
               }
             }
+          },
+          "422":{
+            "description": "request syntax is valid, but content is wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generalError"
+                }
+              }
+            }
           }
         }
       }
@@ -146,7 +156,7 @@
       "post": {
         "tags": ["Arrays"],
         "summary": "Get ONE random customised sorted array",
-        "description": "Allowed Ranges for custom array request:<pre>\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle\nstrictOrder &#8712; [true,false]\n increasingOrder &#8712; [true,false]</pre>",
+        "description": "Allowed Ranges for custom array request:<pre>\nminSz > 0\nmaxSz <= 100000\nminSz <= maxSz\nminEle >= -1000000000 \n maxEle <= 1000000000\n minEle <= maxEle\nareEleUnique &#8712; [true,false]\n increasingOrder &#8712; [true,false]</pre>",
         "requestBody": {
           "description": "Customization Options to generate arrays",
           "content": {
@@ -170,6 +180,16 @@
           },
           "500": {
             "description": "internal server error - returns error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generalError"
+                }
+              }
+            }
+          },
+          "422":{
+            "description": "request syntax is valid, but content is wrong",
             "content": {
               "application/json": {
                 "schema": {
